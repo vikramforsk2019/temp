@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Example of Making POST Request using Ajax in jQuery</title>
+<style type="text/css">
+    label{
+        display: block;
+        margin-bottom: 10px;
+    }
+</style>
+<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+    $("form").submit(function(event){
+    	var vname = $("#name").val();
+        var vemail = $("#email").val();
+        alert(vname)
+        // Stop form from submitting normally
+        event.preventDefault();
+        
+        // Get action URL
+        var actionFile = $(this).attr("action");
+
+        /* Serialize the submitted form control values to be sent to the web server with the request */
+        var formValues = $(this).serialize();
+        alert(formValues)
+        // Send the form data using post
+        $.post(actionFile, vname,vemail function(data){
+            // Display the returned data in browser
+            $("#result").html(data);
+        });
+    });
+});
+</script>
+</head>
+<body>
+    <form action="/examples/php/display-comment.php">
+        <label>Name: <input type="text" name="name" id="name"></label>
+        <label>Comment: <textarea cols="50" name="comment" id="email"></textarea></label>
+        <input type="submit" value="Send">
+    </form>
+    <div id="result"></div>
+</body>
+</html>                            
